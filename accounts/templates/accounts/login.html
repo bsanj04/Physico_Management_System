@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Login | Physio Patient Management
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="login-page">
+    <section class="login-panel login-brand-panel">
+        <div class="brand-content">
+            <h1 class="Clinic-name">
+                {{ clinic_name }}
+            </h1>
+
+            <h2>
+                Patient Management System
+            </h2>
+        </div>
+    </section>
+
+    <section class="login-panel login-form-panel">
+        <div class="login-card">
+            <div class="login-card-heading">
+                <h3>Sign in to your account</h3>
+
+                <p>
+                    Enter your clinic username and password
+                    to continue.
+                </p>
+            </div>
+
+            {% if messages %}
+                <div class="messages" aria-live="polite">
+                    {% for message in messages %}
+                        <div class="message message-error">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form
+                method="post"
+                action="{% url 'login' %}"
+            >
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        value="{{ username|default:'' }}"
+                        autocomplete="username"
+                        maxlength="150"
+                        placeholder="Enter your username"
+                        required
+                        autofocus
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        autocomplete="current-password"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Sign in
+                </button>
+            </form>
+
+            <p class="login-help">
+                Contact the system administrator if you need
+                help accessing your account.
+            </p>
+        </div>
+    </section>
+</main>
+{% endblock %}

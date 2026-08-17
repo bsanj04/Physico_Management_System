@@ -1,0 +1,162 @@
+/* ---------- PAGE LAYOUT ---------- */
+
+.users-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.users-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.users-page-header h1 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+}
+
+.users-page-header p {
+    margin: 0;
+    color: #667085;
+}
+
+.users-header-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+
+/* ---------- TABLE CARD ---------- */
+
+.users-table-card {
+    overflow: hidden;
+    border: 1px solid #dde5e7;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 8px 26px rgba(16, 24, 40, 0.06);
+}
+
+.users-table-wrapper {
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+    min-width: 820px;
+    border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #e7ecee;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.users-table th {
+    background: #f7f9fa;
+    color: #344054;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.users-table td {
+    color: #263238;
+}
+
+.users-table tbody tr:hover {
+    background: #fbfcfc;
+}
+
+.users-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.user-name {
+    font-weight: 650;
+}
+
+.user-role {
+    display: inline-flex;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #e9f7f5;
+    color: #08746b;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.user-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.875rem;
+    font-weight: 650;
+}
+
+.user-status::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.user-status-active {
+    color: #16794b;
+}
+
+.user-status-active::before {
+    background: #22a06b;
+}
+
+.user-status-inactive {
+    color: #a15c00;
+}
+
+.user-status-inactive::before {
+    background: #d97706;
+}
+
+.user-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+/* ---------- EMPTY STATE ---------- */
+
+.empty-state {
+    padding: 38px;
+    text-align: center;
+    color: #667085;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 700px) {
+    .users-page-header {
+        flex-direction: column;
+    }
+
+    .users-header-actions {
+        width: 100%;
+    }
+
+    .users-header-actions .button {
+        flex: 1;
+    }
+
+    .users-page {
+        padding: 24px 16px;
+    }
+}

@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Dashboard | Physio Patient Management
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-nav">
+
+    <p class="dashboard-title">
+        {% if is_doctor %}
+            Doctor Dashboard
+        {% elif is_staff_member %}
+            Staff Dashboard
+        {% else %}
+            User Dashboard
+        {% endif %}
+    </p>
+
+    <div class="dashboard-actions">
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+
+            <button type="submit" class="button button-secondary">
+                Log out
+            </button>
+        </form>
+
+        {% if is_doctor %}
+        <button class="create-patient">
+            <a href="{% url 'patient_create' %}">Create New Patient </a>
+        </button>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<main>
+
+    <div class="main-content">
+
+        <div class="search-container">
+            <h2>Search Patients</h2>
+            <form method="get" class="searching">
+                <input type="text" name="search" value="{{ search_query }}"placeholder="Search Patient">
+                <button type="submit">
+                    Search
+                </button>
+            </form>
+
+            <div class="display-info">
+
+                {% for patient in patients %}
+
+                    <div class="patient-row">
+
+                        <div class="patient-name">
+                            {{ patient.name }}
+                        </div>
+
+                        <div class="patient-dob">
+                            {{ patient.dob }}
+                        </div>
+
+                        <div class="patient-gender">
+                            {{ patient.gender }}
+                        </div>
+
+                        <a href="{% url 'patient_info' patient.id %}" class="view-patient">
+                            View
+                        </a>
+
+                    </div>
+
+                {% empty %}
+
+                    <p class="no-patient">
+                        No patient found
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,142 @@
+.login-page{
+
+    min-height:100vh;
+
+    display:grid;
+
+    grid-template-columns:1fr 480px;
+
+}
+
+/* LEFT SIDE */
+
+.login-brand-panel{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    linear-gradient(
+        145deg,
+        #0b8e84,
+        #04635d
+    );
+
+}
+
+.brand-content{
+
+    width:min(600px,80%);
+
+    color:white;
+
+}
+
+.Clinic-name{
+
+    margin:0;
+
+    font-size:4rem;
+
+    line-height:1;
+
+    font-weight:800;
+
+}
+
+.brand-content h2{
+
+    margin-top:20px;
+
+    font-size:2rem;
+
+    font-weight:400;
+
+}
+
+/* RIGHT SIDE */
+
+.login-form-panel{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+    background:#f7fafb;
+
+}
+
+.login-card{
+
+    width:100%;
+    max-width:420px;
+
+    padding:42px;
+
+    background:white;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.08);
+
+}
+
+.login-card-heading{
+
+    margin-bottom:30px;
+
+}
+
+.login-card-heading h3{
+
+    margin:0;
+
+    font-size:2rem;
+
+}
+
+.login-card-heading p{
+
+    color:#777;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.login-page{
+
+grid-template-columns:1fr;
+
+}
+
+.login-brand-panel{
+
+padding:70px 30px;
+
+min-height:auto;
+
+}
+
+.login-form-panel{
+
+padding:30px;
+
+}
+
+.Clinic-name{
+
+font-size:3rem;
+
+}
+
+}

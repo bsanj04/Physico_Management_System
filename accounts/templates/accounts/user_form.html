@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {{ page_title }} | Physio Patient Management
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/forms.css' %}"
+>
+{% endblock %}
+
+{% block content %}
+<main class="form-page">
+    <header class="form-header">
+        <div>
+            <h1>{{ page_title }}</h1>
+            <p>Clinic user management</p>
+        </div>
+
+        <a href="{% url 'user-list' %}" class="button button-secondary">
+            Back to users
+        </a>
+    </header>
+
+    <section class="form-card">
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="message message-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <div class="help-text">
+                            {{ field.help_text|safe }}
+                        </div>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                        <div class="field-error">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div class="form-actions">
+                <button
+                    type="submit"
+                    class="button button-primary"
+                >
+                    {{ submit_label }}
+                </button>
+
+                <a
+                    href="{% url 'user-list' %}"
+                    class="button button-secondary"
+                >
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,150 @@
+/* ---------- PAGE ---------- */
+
+.form-page {
+    width: min(1200px, calc(100% - 48px));
+    margin: 40px auto;
+}
+
+/* ---------- HEADER ---------- */
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+}
+
+.form-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.form-header p {
+    margin-top: 8px;
+    color: #667085;
+}
+
+/* ---------- CARD ---------- */
+
+.form-card {
+
+    width: 100%;
+    max-width: 700px;
+
+    padding: 36px;
+
+    background: #ffffff;
+
+    border: 1px solid #dde5e7;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 26px rgba(16,24,40,.06);
+
+}
+
+/* ---------- FORM ---------- */
+
+.form-group {
+
+    margin-bottom: 22px;
+
+}
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: 600;
+
+    color: #344054;
+
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 8px;
+
+    background: white;
+
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+
+    outline:none;
+
+    border-color:#0b8e84;
+
+    box-shadow:0 0 0 3px rgba(11,142,132,.12);
+
+}
+
+.help-text{
+
+    margin-top:6px;
+
+    color:#667085;
+
+    font-size:.85rem;
+
+}
+
+.field-error{
+
+    margin-top:6px;
+
+    color:#b42318;
+
+    font-size:.85rem;
+
+}
+
+/* ---------- BUTTONS ---------- */
+
+.form-actions{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:30px;
+
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:700px){
+
+.form-page{
+
+width:min(100% - 32px,1200px);
+
+}
+
+.form-card{
+
+padding:24px;
+
+}
+
+.form-header{
+
+flex-direction:column;
+gap:16px;
+
+}
+
+}
