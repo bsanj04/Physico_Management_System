@@ -423,3 +423,19 @@ def user_activate_view(
     )
 
     return redirect("user-list")
+
+def dashboard(request):
+
+    clinic_settings = ClinicSettings.objects.first()
+
+    return render(
+        request,
+        "dashboard.html",
+        {
+            "clinic_name": (
+                clinic_settings.clinic_name
+                if clinic_settings
+                else "Physiotherapy Clinic"
+            ),
+        },
+    )

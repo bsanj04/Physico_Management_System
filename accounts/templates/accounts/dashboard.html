@@ -23,6 +23,10 @@ Dashboard | Physio Patient Management
         {% endif %}
     </p>
 
+    <p class="clinic-name">
+        {{ clinic_name }}
+    </p>
+
     <div class="dashboard-actions">
 
         <form method="post" action="{% url 'logout' %}">

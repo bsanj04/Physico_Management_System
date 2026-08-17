@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/patient_info.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-nav">
+
+    <p class="nav-title">
+        {% if is_doctor %}
+            Doctor
+        {% else %}
+            Staff
+        {% endif %}
+    </p>
+
+    <p class="clinic-name">
+        {{ clinic_name }}
+    </p>
+
+    <div class="nav-actions">
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+
+            <button type="submit" class="button button-secondary">
+                Log out
+            </button>
+        </form>
+
+        <a href="{% url 'dashboard' %}" class="button button-secondary">
+            Back
+        </a>
+    </div>
+
+</div>
+
+<main>
+
+    <div class="patient-info-container">
+
+        <h1> Patient Information </h1>
+
+        <div class="patient-info">
+
+            <div class="info-row">
+                <span class="info-label">Patient Name:</span>
+                <span class="info-value">{{ patient.name }}</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Date of Birth:</span>
+                <span class="info-value">{{ patient.dob }}</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Age:</span>
+                <span class="info-value">{{ patient.age }}</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Gender:</span>
+                <span class="info-value">{{ patient.gender }}</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Weight:</span>
+                <span class="info-value">{{ patient.weight }} kg</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">Height:</span>
+                <span class="info-value">{{ patient.height }} cm</span>
+            </div>
+
+            <div class="info-section">
+                <h2>Diagnosis</h2>
+
+                <p>
+                    {{ patient.medical_diagnosis }}
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="treatment-section">
+
+            <h2>Treatment History</h2>
+
+            {% for treatment in patient.treatments.all %}
+
+                <div class="treatment-row">
+
+                    <div class="treatment-date">
+                        {{ treatment.created_at }}
+                    </div>
+
+                    <div class="treatment-info">
+                        {{ treatment.treatment }}
+                    </div>
+
+                    <div class="treatment-doctor">
+                        Added by: {{ treatment.created_by }}
+                    </div>
+
+                    {% if is_doctor %}
+                        <button type="button" class="edit-treatment">
+                            Edit
+                        </button>
+                    {% endif %}
+
+                </div>
+
+            {% empty %}
+
+                <p class="no-treatment">
+                    No treatments have been added yet.
+                </p>
+
+            {% endfor %}
+
+            {% if is_doctor %}
+                <button type="button" class="add-treatment">
+                    Add Treatment
+                </button>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock %}

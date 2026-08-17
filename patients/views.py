@@ -31,19 +31,22 @@ def patient_create(
         },
     )
 
-def patient_info(
-        request: HttpRequest,
-        patient_id: int,
-    )-> HttpResponse:
-        patient = get_object_or_404(
-            Patient,
-            id=patient_id,
+def patient_info(request, patient_id):
+
+    patient = get_object_or_404(
+        Patient,
+        id=patient_id,
     )
 
-        return render(
-            request,
-            "patients/patient_info.html",
-            {
-                "patient": patient,
-            },
-        )
+    is_doctor = request.user.groups.filter(
+        name="Doctor"
+    ).exists()
+
+    return render(
+        request,
+        "patients/patient_info.html",
+        {
+            "patient": patient,
+            "is_doctor": is_doctor,
+        },
+    )

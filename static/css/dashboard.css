@@ -26,6 +26,15 @@
     color: #333;
 }
 
+.clinic-name{
+    margin-left: 60px;
+
+    font-size: 28px;
+    font-weight: 600;
+
+    color: #333;
+}
+
 
 /* Right side navigation buttons */
 
