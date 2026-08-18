@@ -2,12 +2,27 @@
 /* Dashboard Navigation */
 
 .dashboard-nav {
+   position: relative;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 18px 5%;
-    background-color: white;
-    border-bottom: 1px solid #e5e7eb;
+   
+   border-bottom: 1px solid #dfe5e8; 
+}
+
+.clinic-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    margin-right: 0;
+
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
 }
 
 .nav-title {
@@ -263,4 +278,90 @@
     .treatment-section {
         padding: 18px;
     }
+}
+
+/* Treatment Form */
+
+.treatment-form {
+    margin-top: 20px;
+    padding: 20px;
+
+    background-color: #f8f9fa;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.treatment-form textarea {
+    width: 100%;
+    min-height: 120px;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.treatment-form textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+
+/* Form Actions */
+
+.treatment-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+
+/* Save Treatment */
+
+.save-treatment {
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #2563eb;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.save-treatment:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* Cancel */
+
+.cancel-treatment {
+    padding: 10px 18px;
+
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+    background-color: white;
+    color: #333;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.cancel-treatment:hover {
+    background-color: #f3f4f6;
 }

@@ -106,12 +106,6 @@
                         Added by: {{ treatment.created_by }}
                     </div>
 
-                    {% if is_doctor %}
-                        <button type="button" class="edit-treatment">
-                            Edit
-                        </button>
-                    {% endif %}
-
                 </div>
 
             {% empty %}
@@ -123,9 +117,25 @@
             {% endfor %}
 
             {% if is_doctor %}
-                <button type="button" class="add-treatment">
+                <button type="button" class="add-treatment" onclick="showTreatmentForm()">
                     Add Treatment
                 </button>
+
+                <form method="post" action= "{% url 'treatment_create' patient.id %}" id="treatment-form" class="treatment-form" style="display: none;">
+                    {% csrf_token %}
+
+                    <textarea name="treatment" rows="5" placeholder="Enter treatment here" required></textarea>
+
+                    <div class="treatment-form-actions">
+                        <button type="submit" class="save-treatment">
+                            Save Treatment
+                        </button>
+
+                        <button type="button" class="cancel-treatment" onclick="hideTreatmentForm()">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
             {% endif %}
 
         </div>
@@ -133,5 +143,15 @@
     </div>
 
 </main>
+
+<script>
+    function showTreatmentForm() {
+        document.getElementById("treatment-form").style.display = "block";
+    }
+
+    function hideTreatmentForm() {
+        document.getElementById("treatment-form").style.display = "none";
+    }
+</script>
 
 {% endblock %}

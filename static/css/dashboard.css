@@ -3,15 +3,15 @@
    ========================= */
 
 .dashboard-nav {
-    width: 100%;
+    position: relative;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    padding: 18px 30px;
-
-    border-bottom: 1px solid #dfe5e8;
+    padding: 18px 5%;
+   
+   border-bottom: 1px solid #dfe5e8; 
 }
 
 
@@ -26,12 +26,15 @@
     color: #333;
 }
 
-.clinic-name{
-    margin-left: 60px;
+.clinic-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    margin: 0;
 
     font-size: 28px;
     font-weight: 600;
-
     color: #333;
 }
 
