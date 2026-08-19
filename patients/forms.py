@@ -8,11 +8,32 @@ class PatientForm(forms.ModelForm):
         model = Patient
         fields = [
             "name",
+            "number",
             "dob",
             "gender",
             "weight",
             "height",
             "medical_diagnosis",
+        ]
+
+        widgets = {
+            "dob": forms.DateInput(
+                attrs={
+                    "type": "date",
+                }
+            ),
+        }
+
+class StaffPatientForm(forms.ModelForm):
+    class Meta:
+        model = Patient
+        fields = [
+            "name",
+            "number",
+            "dob",
+            "gender",
+            "weight",
+            "height",
         ]
 
         widgets = {

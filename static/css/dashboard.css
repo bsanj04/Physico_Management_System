@@ -3,15 +3,17 @@
    ========================= */
 
 .dashboard-nav {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     padding: 18px 5%;
-   
-   border-bottom: 1px solid #dfe5e8; 
+
+    border-bottom: 1px solid #dfe5e8;
 }
 
 
@@ -382,4 +384,40 @@ main {
 
         margin-top: 8px;
     }
+}
+
+.pagination {
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.pagination a,
+.pagination .current-page {
+    padding: 8px 12px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+}
+
+.pagination a {
+    background-color: #2563eb;
+    color: white;
+}
+
+.pagination a:hover {
+    background-color: #1d4ed8;
+}
+
+.pagination .current-page {
+    background-color: #e5e7eb;
+    color: #111827;
 }

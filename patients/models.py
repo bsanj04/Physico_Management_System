@@ -2,6 +2,7 @@ from datetime import date
 
 from django.conf import settings
 from django.db import models
+from django.core.validators import RegexValidator
 
 
 class Patient(models.Model):
@@ -15,6 +16,19 @@ class Patient(models.Model):
     name = models.CharField(
         max_length=150,
         verbose_name="Patient's Full Name",
+    )
+
+    number = models.CharField(
+        max_length=10,
+        validators=[
+            RegexValidator(
+                regex=r"^\d{10}$",
+                message="Phone number must contain exactly 10 digits.",
+            )
+        ],
+        verbose_name="Phone No",
+        blank=True,
+        default="",
     )
 
     dob = models.DateField(

@@ -1,37 +1,69 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 
-from accounts.decorators import doctor_required
+from accounts.decorators import (
+    doctor_required,
+    user_is_doctor,
+    user_is_staff_member,
+)
 
 from .models import Patient
 from accounts.models import ClinicSettings
-from .forms import PatientForm, TreatmentForm
+from .forms import PatientForm, TreatmentForm, StaffPatientForm
 
 
-@doctor_required
+
 def patient_create(
     request: HttpRequest,
 ) -> HttpResponse:
 
+    is_doctor = user_is_doctor(request.user)
+    is_staff = user_is_staff_member(request.user)
+
+    if not is_doctor and not is_staff:
+        return redirect("dashboard")
+
     if request.method == "POST":
-        patient_form = PatientForm(request.POST)
-        treatment_form = TreatmentForm(request.POST)
+        if is_doctor:
+            patient_form = PatientForm(request.POST)
+        else:
+            patient_form = StaffPatientForm(request.POST)
 
-        if patient_form.is_valid() and treatment_form.is_valid():
-            patient = patient_form.save(commit=False)
-            patient.created_by = request.user
-            patient.save()
+        if is_doctor:
+            treatment_form = TreatmentForm(request.POST)
 
-            treatment = treatment_form.save(commit=False)
-            treatment.patient = patient
-            treatment.created_by = request.user
-            treatment.save()
+            if patient_form.is_valid() and treatment_form.is_valid():
+                patient = patient_form.save(commit=False)
+                patient.created_by = request.user
+                patient.save()
 
-            return redirect("dashboard")
+                treatment = treatment_form.save(commit=False)
+                treatment.patient = patient
+                treatment.created_by = request.user
+                treatment.save()
+
+                return redirect("dashboard")
+
+        else:
+            treatment_form = None
+
+            if patient_form.is_valid():
+                patient = patient_form.save(commit=False)
+                patient.created_by = request.user
+                patient.save()
+
+                return redirect("dashboard")
 
     else:
-        patient_form = PatientForm()
-        treatment_form = TreatmentForm()
+        if is_doctor:
+            patient_form = PatientForm()
+        else:
+            patient_form = StaffPatientForm()
+
+        if is_doctor:
+            treatment_form = TreatmentForm()
+        else:
+            treatment_form = None
 
     return render(
         request,
@@ -43,6 +75,8 @@ def patient_create(
             "submit_label": "Create Patient",
         },
     )
+
+
 
 def patient_info(request, patient_id):
 

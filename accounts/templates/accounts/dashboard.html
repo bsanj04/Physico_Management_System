@@ -37,7 +37,7 @@ Dashboard | Physio Patient Management
             </button>
         </form>
 
-        {% if is_doctor %}
+        {% if is_doctor or is_staff_member %}
         <button class="create-patient">
             <a href="{% url 'patient_create' %}">Create New Patient </a>
         </button>
@@ -55,14 +55,14 @@ Dashboard | Physio Patient Management
 
         <div class="search-container">
             <h2>Search Patients</h2>
-            <form method="get" class="searching">
-                <input type="text" name="search" value="{{ search_query }}"placeholder="Search Patient">
+            <form method="get" class="searching" id="patient-search-form">
+                <input type="text" name="search" value="{{ search_query }}"placeholder="Search Patient" id="patient-search">
                 <button type="submit">
                     Search
                 </button>
             </form>
 
-            <div class="display-info">
+            <div class="display-info" id="patient-results">
 
                 {% for patient in patients %}
 
@@ -88,18 +88,94 @@ Dashboard | Physio Patient Management
 
                 {% empty %}
 
-                    <p class="no-patient">
-                        No patient found
-                    </p>
+                    {% if search_query %}
+                        <p class="no-patient">
+                            No patient found
+                        </p>
+                    {% endif %}
 
                 {% endfor %}
 
             </div>
+
+            {% if search_query and patients.paginator.num_pages > 1 %}
+                <div class="pagination">
+
+                    {% if patients.has_previous %}
+                        <a href="?search={{ search_query }}&page={{ patients.previous_page_number }}">
+                            Previous
+                        </a>
+                    {% endif %}
+
+                    {% for page_num in patients.paginator.page_range %}
+
+                        {% if page_num == patients.number %}
+                            <span class="current-page">
+                                {{ page_num }}
+                            </span>
+                        {% else %}
+                            <a href="?search={{ search_query }}&page={{ page_num }}">
+                                {{ page_num }}
+                            </a>
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {% if patients.has_next %}
+                        <a href="?search={{ search_query }}&page={{ patients.next_page_number }}">
+                            Next
+                        </a>
+                    {% endif %}
+
+                </div>
+            {% endif %}
 
         </div>
 
     </div>
 
 </main>
+
+<script>
+    const searchForm = document.getElementById("patient-search-form");
+    const searchInput = document.getElementById("patient-search");
+    const patientResults = document.getElementById("patient-results");
+
+    searchForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const searchValue = searchInput.value.trim();
+
+        if (searchValue === "") {
+            patientResults.innerHTML = "";
+            return;
+        }
+
+        fetch(`/dashboard/?search=${encodeURIComponent(searchValue)}`)
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+
+                const documentResult = parser.parseFromString(
+                    html,
+                    "text/html"
+                );
+
+                const newResults =
+                    documentResult.getElementById("patient-results");
+
+                if (newResults) {
+                    patientResults.innerHTML = newResults.innerHTML;
+                }
+            });
+    });
+
+    searchInput.addEventListener("input", function () {
+        if (searchInput.value.trim() === "") {
+            patientResults.innerHTML = "";
+        }
+    });
+    
+</script>
 
 {% endblock %}

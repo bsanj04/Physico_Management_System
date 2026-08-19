@@ -28,6 +28,7 @@ from .forms import (
 )
 from .models import ClinicSettings
 from patients.models import Patient
+from django.core.paginator import Paginator
 
 
 User = get_user_model()
@@ -109,10 +110,17 @@ def dashboard_view(request: HttpRequest) -> HttpResponse:
         return redirect("configuration")
     
     search_query = request.GET.get("search", "").strip()
-    patients = Patient.objects.all()
 
     if search_query:
-        patients = patients.filter(name__icontains=search_query)
+        patients = Patient.objects.filter(name__icontains=search_query)
+
+        paginator = Paginator(patients, 10)
+
+        page_number = request.GET.get("page")
+        patients = paginator.get_page(page_number)
+
+    else:
+        patients = Patient.objects.none()
 
     return render(
         request,

@@ -2,15 +2,18 @@
 /* Dashboard Navigation */
 
 .dashboard-nav {
-   position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     padding: 18px 5%;
-   
-   border-bottom: 1px solid #dfe5e8; 
+
+    background-color: #f6f8fa;
+    border-bottom: 1px solid #dfe5e8;
 }
 
 .clinic-name {

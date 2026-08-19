@@ -18,7 +18,7 @@ class UserCreateForm(UserCreationForm):
     last_name = forms.CharField(max_length=150)
 
     email = forms.EmailField(
-        required=False,
+        required=True,
     )
 
     role = forms.ChoiceField(
@@ -46,6 +46,16 @@ class UserCreateForm(UserCreationForm):
             )
 
         return username
+    
+    def clean_email(self) -> str:
+        email = self.cleaned_data["email"].strip().lower()
+
+        if User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError(
+                "A user with this email address already exists."
+            )
+
+        return email
 
     def save(self, commit: bool = True):
         user = super().save(commit=False)

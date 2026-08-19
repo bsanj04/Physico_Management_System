@@ -44,10 +44,7 @@ Login | Physio Patient Management
                 </div>
             {% endif %}
 
-            <form
-                method="post"
-                action="{% url 'login' %}"
-            >
+            <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
 
                 <div class="form-group">
@@ -83,10 +80,7 @@ Login | Physio Patient Management
                     >
                 </div>
 
-                <button
-                    type="submit"
-                    class="primary-button"
-                >
+                <button type="submit" class="primary-button">
                     Sign in
                 </button>
             </form>
