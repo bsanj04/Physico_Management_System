@@ -164,6 +164,154 @@
     color: #374151;
 }
 
+/* Diagnosis */
+
+.info-section {
+    margin-top: 25px;
+}
+
+.info-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #1f2937;
+}
+
+.info-section p {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 15px;
+    line-height: 1.6;
+    color: #374151;
+}
+
+
+/* Diagnosis History */
+
+.diagnosis-row {
+    margin-top: 15px;
+    padding: 15px;
+
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+}
+
+.diagnosis-date {
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.diagnosis-info {
+    margin-bottom: 8px;
+    line-height: 1.6;
+    color: #374151;
+}
+
+.diagnosis-doctor {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+
+/* Add Diagnosis */
+
+.add-diagnosis {
+    margin-top: 15px;
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #2563eb;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.add-diagnosis:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* Diagnosis Form */
+
+.diagnosis-form {
+    margin-top: 15px;
+}
+
+.diagnosis-form textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    font-family: inherit;
+    font-size: 15px;
+    line-height: 1.5;
+
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.diagnosis-form textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+
+/* Diagnosis Form Buttons */
+
+.diagnosis-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.save-diagnosis {
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #2563eb;
+    color: white;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.save-diagnosis:hover {
+    background-color: #1d4ed8;
+}
+
+.cancel-diagnosis {
+    padding: 10px 18px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+
+    background-color: white;
+    color: #374151;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.cancel-diagnosis:hover {
+    background-color: #f3f4f6;
+}
+
 
 /* Treatment Section */
 

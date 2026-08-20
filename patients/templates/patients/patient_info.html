@@ -81,11 +81,87 @@
             </div>
 
             <div class="info-section">
-                <h2>Diagnosis</h2>
+                <h2>Diagnosis History</h2>
 
-                <p>
-                    {{ patient.medical_diagnosis }}
-                </p>
+                <div class="diagnosis-row">
+                    <div class="diagnosis-info">
+                        {{ patient.medical_diagnosis }}
+                    </div>
+
+                    <div class="diagnosis-doctor">
+                        Initial diagnosis
+                    </div>
+                </div>
+
+                {% for diagnosis in patient.diagnoses.all %}
+
+                    <div class="diagnosis-row">
+
+                        <div class="diagnosis-date">
+                            {{ diagnosis.created_at }}
+                        </div>
+
+                        <div class="diagnosis-info">
+                            {{ diagnosis.diagnosis }}
+                        </div>
+
+                        <div class="diagnosis-doctor">
+                            Added by: {{ diagnosis.created_by }}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+                {% if is_doctor %}
+
+                    <button
+                        type="button"
+                        class="add-diagnosis"
+                        onclick="showDiagnosisForm()"
+                    >
+                        Add Diagnosis
+                    </button>
+
+                    <form
+                        method="post"
+                        action="{% url 'diagnosis_create' patient.id %}"
+                        id="diagnosis-form"
+                        class="diagnosis-form"
+                        style="display: none;"
+                    >
+                        {% csrf_token %}
+
+                        <textarea
+                            name="diagnosis"
+                            rows="5"
+                            placeholder="Enter new diagnosis..."
+                            required
+                        ></textarea>
+
+                        <div class="diagnosis-form-actions">
+
+                            <button
+                                type="submit"
+                                class="save-diagnosis"
+                            >
+                                Save Diagnosis
+                            </button>
+
+                            <button
+                                type="button"
+                                class="cancel-diagnosis"
+                                onclick="hideDiagnosisForm()"
+                            >
+                                Cancel
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                {% endif %}
+
             </div>
 
         </div>
@@ -150,6 +226,7 @@
 </main>
 
 <script>
+    
     function showTreatmentForm() {
         document.getElementById("treatment-form").style.display = "block";
     }
@@ -157,6 +234,15 @@
     function hideTreatmentForm() {
         document.getElementById("treatment-form").style.display = "none";
     }
+
+    function showDiagnosisForm() {
+        document.getElementById("diagnosis-form").style.display = "block";
+    }
+
+    function hideDiagnosisForm() {
+        document.getElementById("diagnosis-form").style.display = "none";
+    }
+
 </script>
 
 {% endblock %}

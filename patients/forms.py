@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Patient, Treatment
+from .models import Patient, Treatment, Diagnosis
 
 
 class PatientForm(forms.ModelForm):
@@ -57,6 +57,23 @@ class TreatmentForm(forms.ModelForm):
                 attrs={
                     "rows": 5,
                     "placeholder": "Enter treatment details or clinical notes...",
+                }
+            ),
+        }
+
+
+class DiagnosisForm(forms.ModelForm):
+    class Meta:
+        model = Diagnosis
+        fields = [
+            "diagnosis",
+        ]
+
+        widgets = {
+            "diagnosis": forms.Textarea(
+                attrs={
+                    "rows": 5,
+                    "placeholder": "Enter diagnosis...",
                 }
             ),
         }

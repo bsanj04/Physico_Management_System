@@ -7,9 +7,9 @@ from accounts.decorators import (
     user_is_staff_member,
 )
 
-from .models import Patient
+from .models import Patient, Diagnosis
 from accounts.models import ClinicSettings
-from .forms import PatientForm, TreatmentForm, StaffPatientForm
+from .forms import PatientForm, TreatmentForm, StaffPatientForm, DiagnosisForm
 
 
 
@@ -128,6 +128,26 @@ def treatment_create(request: HttpRequest, patient_id: int) -> HttpResponse:
             treatment.created_by = request.user
 
             treatment.save()
+
+            return redirect("patient_info", patient_id=patient.id)
+
+    return redirect("patient_info", patient_id=patient.id)
+
+
+@doctor_required
+def diagnosis_create(request: HttpRequest, patient_id: int) -> HttpResponse:
+    patient = get_object_or_404(Patient, id=patient_id)
+
+    if request.method == "POST":
+        form = DiagnosisForm(request.POST)
+
+        if form.is_valid():
+            diagnosis = form.save(commit=False)
+
+            diagnosis.patient = patient
+            diagnosis.created_by = request.user
+
+            diagnosis.save()
 
             return redirect("patient_info", patient_id=patient.id)
 

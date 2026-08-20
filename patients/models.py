@@ -118,3 +118,25 @@ class Treatment(models.Model):
 
     def __str__(self):
         return f"{self.patient.name} - {self.created_at:%d/%m/%Y}"
+    
+
+class Diagnosis(models.Model):
+    patient = models.ForeignKey(
+        Patient,
+        on_delete=models.CASCADE,
+        related_name="diagnoses",
+    )
+
+    diagnosis = models.TextField()
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+    )
+
+    def __str__(self):
+        return f"{self.patient.name} - {self.created_at}"
